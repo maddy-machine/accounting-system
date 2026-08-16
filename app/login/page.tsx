@@ -3,7 +3,7 @@
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import SplineScene from '@/components/SplineScene'
+import SplineSceneWrapper from '@/components/SplineSceneWrapper'
 
 export default function Login() {
   const router = useRouter()
@@ -36,7 +36,7 @@ export default function Login() {
     <div className="login-container">
       {/* Left side — Spline 3D Scene */}
       <div className="login-spline-side">
-        <SplineScene
+        <SplineSceneWrapper
           scene="https://prod.spline.design/6Wq1Q7YGyM-uBg18/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />

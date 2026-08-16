@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { getDashboardMetrics } from './actions'
-import dynamic from 'next/dynamic'
-const SplineScene = dynamic(() => import('@/components/SplineScene'), { ssr: false })
+import SplineSceneWrapper from '@/components/SplineSceneWrapper'
 export default async function Dashboard() {
   const transactions = await prisma.transaction.findMany({
     orderBy: { date: 'desc' },
@@ -16,7 +15,7 @@ export default async function Dashboard() {
       <div className="stats-grid">
         {/* Hero with Spline 3D (Wide & Tall) */}
         <div className="dashboard-hero bento-wide bento-tall card card-tilt" style={{ margin: 0, padding: 0 }}>
-          <SplineScene
+          <SplineSceneWrapper
             scene="https://prod.spline.design/6Wq1Q7YGyM-uBg18/scene.splinecode"
           />
           <div className="dashboard-hero-content" style={{ padding: '28px', pointerEvents: 'none' }}>
