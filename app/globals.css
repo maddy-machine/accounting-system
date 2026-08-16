@@ -563,7 +563,6 @@ button {
    ══════════════════════════════════════════ */
 
 .ai-insights-card {
-  margin-bottom: 32px;
   background: linear-gradient(135deg, var(--primary-soft), var(--accent-soft));
   border-left: 4px solid var(--accent);
   animation: fadeInUp 0.6s var(--ease-out-expo) 0.1s backwards;
@@ -875,10 +874,10 @@ select.form-input {
 
 .dashboard-hero {
   position: relative;
-  height: 200px;
+  height: 100%;
+  min-height: 304px;
   border-radius: 24px;
   overflow: hidden;
-  margin-bottom: 32px;
   background: linear-gradient(135deg, var(--primary-dark), rgba(14, 14, 16, 0.9));
   border: 1px solid var(--glass-border);
   animation: fadeInUp 0.5s var(--ease-out-expo);

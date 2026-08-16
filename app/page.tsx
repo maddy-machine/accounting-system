@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { getDashboardMetrics } from './actions'
-import SplineScene from '@/components/SplineScene'
-
+import dynamic from 'next/dynamic'
+const SplineScene = dynamic(() => import('@/components/SplineScene'), { ssr: false })
 export default async function Dashboard() {
   const transactions = await prisma.transaction.findMany({
     orderBy: { date: 'desc' },
