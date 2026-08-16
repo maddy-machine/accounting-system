@@ -6,8 +6,14 @@ export default function LogoutButton() {
   return (
     <button 
       onClick={() => signOut()} 
-      className="btn" 
-      style={{ width: '100%', marginTop: '16px', color: 'var(--danger)' }}
+      className="btn logout-btn" 
+      style={{ 
+        width: '100%', 
+        marginTop: '8px', 
+        color: 'var(--danger)',
+        borderColor: 'rgba(231, 76, 60, 0.15)',
+        transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+      }}
     >
       Sign Out
     </button>

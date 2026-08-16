@@ -32,27 +32,36 @@ export default async function Invoices() {
             <tbody>
               {invoices.length === 0 && (
                 <tr>
-                  <td colSpan={6} style={{ textAlign: 'center', color: 'var(--text-muted)' }}>No invoices yet.</td>
+                  <td colSpan={6} style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '40px' }}>
+                    <div style={{ fontSize: '28px', marginBottom: '8px', opacity: 0.3 }}>❑</div>
+                    No invoices yet.
+                  </td>
                 </tr>
               )}
               {invoices.map((inv) => (
                 <tr key={inv.id}>
-                  <td>INV-{inv.id.toString().padStart(3, '0')}</td>
-                  <td>{inv.client?.name || 'Unknown'}</td>
+                  <td style={{ color: 'var(--foreground)', fontWeight: 600 }}>INV-{inv.id.toString().padStart(3, '0')}</td>
+                  <td style={{ color: 'var(--foreground)' }}>{inv.client?.name || 'Unknown'}</td>
                   <td>{inv.dueDate.toLocaleDateString()}</td>
                   <td>
                     <span className={`badge ${inv.status === 'PAID' ? 'badge-success' : 'badge-warning'}`}>
                       {inv.status}
                     </span>
                   </td>
-                  <td>${inv.totalAmount.toFixed(2)}</td>
-                  <td style={{ display: 'flex', alignItems: 'center' }}>
+                  <td style={{ fontWeight: 600, color: 'var(--accent)' }}>${inv.totalAmount.toFixed(2)}</td>
+                  <td style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     {inv.status !== 'PAID' && (
                       <form action={async () => {
                         'use server'
                         await updateInvoiceStatus(inv.id, 'PAID')
                       }}>
-                        <button type="submit" className="btn" style={{ padding: '4px 8px', fontSize: '12px' }}>Mark Paid</button>
+                        <button
+                          type="submit"
+                          className="btn"
+                          style={{ padding: '6px 12px', fontSize: '12px' }}
+                        >
+                          Mark Paid
+                        </button>
                       </form>
                     )}
                     <PrintButton />

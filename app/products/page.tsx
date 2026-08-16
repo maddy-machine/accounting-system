@@ -8,60 +8,91 @@ export default async function ProductsPage() {
 
   return (
     <div>
-      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="page-header">
         <h1 className="page-title">Products & Services</h1>
       </div>
 
+      {/* Add Product Form */}
       <div className="card" style={{ marginBottom: '24px' }}>
-        <h2 style={{ fontSize: '16px', marginBottom: '16px', fontWeight: '500' }}>Add New Product/Service</h2>
-        <form action={createProduct} style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px' }}>
-          <div>
-            <label style={{ display: 'block', marginBottom: '4px', fontSize: '14px' }}>Name</label>
-            <input name="name" type="text" required className="form-input" style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }} />
+        <h2 style={{ fontSize: '16px', marginBottom: '20px', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ color: 'var(--accent)' }}>✦</span>
+          Add New Product/Service
+        </h2>
+        <form action={createProduct} style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '500px' }}>
+          <div className="form-group" style={{ marginBottom: 0 }}>
+            <label className="form-label">Name</label>
+            <input name="name" type="text" required className="form-input" placeholder="e.g. Web Development" />
           </div>
-          <div>
-            <label style={{ display: 'block', marginBottom: '4px', fontSize: '14px' }}>Description</label>
-            <input name="description" type="text" className="form-input" style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }} />
+          <div className="form-group" style={{ marginBottom: 0 }}>
+            <label className="form-label">Description</label>
+            <input name="description" type="text" className="form-input" placeholder="Brief description..." />
           </div>
-          <div>
-            <label style={{ display: 'block', marginBottom: '4px', fontSize: '14px' }}>Price</label>
-            <input name="price" type="number" step="0.01" required className="form-input" style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }} />
+          <div className="form-row">
+            <div className="form-group" style={{ marginBottom: 0 }}>
+              <label className="form-label">Price ($)</label>
+              <input name="price" type="number" step="0.01" required className="form-input" placeholder="0.00" />
+            </div>
+            <div className="form-group" style={{ marginBottom: 0, display: 'flex', alignItems: 'flex-end' }}>
+              <label style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                fontSize: '14px',
+                color: 'var(--text-secondary)',
+                padding: '13px 18px',
+                background: 'rgba(10, 10, 11, 0.6)',
+                borderRadius: '12px',
+                border: '1px solid var(--glass-border)',
+                width: '100%',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}>
+                <input name="isTaxable" type="checkbox" value="true" defaultChecked style={{
+                  accentColor: 'var(--primary)',
+                  width: '16px',
+                  height: '16px',
+                }} />
+                Is Taxable
+              </label>
+            </div>
           </div>
-          <div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px' }}>
-              <input name="isTaxable" type="checkbox" value="true" defaultChecked />
-              Is Taxable?
-            </label>
-          </div>
-          <button type="submit" className="btn btn-primary" style={{ padding: '8px 16px', backgroundColor: 'var(--primary)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+          <button type="submit" className="btn btn-primary" style={{ alignSelf: 'flex-start', padding: '12px 28px' }}>
             Add Product
           </button>
         </form>
       </div>
 
+      {/* Product List */}
       <div className="card">
         <div className="table-wrapper">
-          <table className="data-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table className="data-table">
             <thead>
-              <tr style={{ textAlign: 'left', borderBottom: '2px solid #eee' }}>
-                <th style={{ padding: '12px' }}>Name</th>
-                <th style={{ padding: '12px' }}>Description</th>
-                <th style={{ padding: '12px' }}>Price</th>
-                <th style={{ padding: '12px' }}>Taxable</th>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Taxable</th>
               </tr>
             </thead>
             <tbody>
               {products.length === 0 && (
                 <tr>
-                  <td colSpan={4} style={{ textAlign: 'center', padding: '24px', color: 'var(--text-muted)' }}>No products found.</td>
+                  <td colSpan={4} style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
+                    <div style={{ fontSize: '28px', marginBottom: '8px', opacity: 0.3 }}>✦</div>
+                    No products found.
+                  </td>
                 </tr>
               )}
               {products.map(p => (
-                <tr key={p.id} style={{ borderBottom: '1px solid #eee' }}>
-                  <td style={{ padding: '12px' }}>{p.name}</td>
-                  <td style={{ padding: '12px' }}>{p.description || '-'}</td>
-                  <td style={{ padding: '12px' }}>${p.price.toFixed(2)}</td>
-                  <td style={{ padding: '12px' }}>{p.isTaxable ? 'Yes' : 'No'}</td>
+                <tr key={p.id}>
+                  <td style={{ fontWeight: 600, color: 'var(--foreground)' }}>{p.name}</td>
+                  <td>{p.description || <span style={{ opacity: 0.4 }}>—</span>}</td>
+                  <td style={{ color: 'var(--accent)', fontWeight: 600 }}>${p.price.toFixed(2)}</td>
+                  <td>
+                    <span className={`badge ${p.isTaxable ? 'badge-success' : 'badge-warning'}`}>
+                      {p.isTaxable ? 'Yes' : 'No'}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>

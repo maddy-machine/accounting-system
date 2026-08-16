@@ -1,10 +1,9 @@
 import './globals.css';
-import Link from 'next/link';
-import LogoutButton from '@/components/LogoutButton';
+import AnimatedSidebar from '@/components/AnimatedSidebar';
 
 export const metadata = {
-  title: 'Accounting System',
-  description: 'Small Business Accounting System',
+  title: 'AccountingPro — Premium Financial Management',
+  description: 'Premium small business accounting system with AI insights, invoicing, and financial tracking.',
 };
 
 export default function RootLayout({
@@ -14,36 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body>
         <div className="layout">
-          <aside className="sidebar">
-            <div style={{ marginBottom: '32px', fontSize: '20px', fontWeight: 'bold', color: 'var(--foreground)' }}>
-              Accounting<span style={{ color: 'var(--primary)' }}>Pro</span>
-            </div>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <Link href="/" className="sidebar-nav-item active">
-                Dashboard
-              </Link>
-              <Link href="/transactions" className="sidebar-nav-item">
-                Transactions
-              </Link>
-              <Link href="/invoices" className="sidebar-nav-item">
-                Invoices
-              </Link>
-              <Link href="/clients" className="sidebar-nav-item">
-                Clients
-              </Link>
-              <Link href="/products" className="sidebar-nav-item">
-                Products & Services
-              </Link>
-            </nav>
-            <div style={{ marginTop: 'auto' }}>
-              <Link href="/transactions/new" className="btn btn-primary" style={{ width: '100%' }}>
-                + New Transaction
-              </Link>
-              <LogoutButton />
-            </div>
-          </aside>
+          <AnimatedSidebar />
           <main className="main-content">
             {children}
           </main>

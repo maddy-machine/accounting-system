@@ -9,31 +9,31 @@ export default function NewClient() {
         <Link href="/clients" className="btn">Cancel</Link>
       </div>
 
-      <div className="card" style={{ maxWidth: '600px' }}>
+      <div className="card card-tilt" style={{ maxWidth: '600px' }}>
         <form action={createClient}>
-          <div className="form-group">
-            <label className="form-label">Contact Name</label>
-            <input type="text" name="name" className="form-input" required placeholder="e.g. Jane Doe" />
+          <div className="form-floating">
+            <input type="text" id="client-name" name="name" className="form-input" required placeholder=" " />
+            <label className="form-label" htmlFor="client-name">Contact Name</label>
           </div>
           
-          <div className="form-group">
-            <label className="form-label">Company Name</label>
-            <input type="text" name="company" className="form-input" placeholder="e.g. Acme Corp" />
+          <div className="form-floating">
+            <input type="text" id="client-company" name="company" className="form-input" placeholder=" " />
+            <label className="form-label" htmlFor="client-company">Company Name (Optional)</label>
           </div>
 
           <div className="form-row">
-            <div className="form-group">
-              <label className="form-label">Email</label>
-              <input type="email" name="email" className="form-input" placeholder="jane@example.com" />
+            <div className="form-floating">
+              <input type="email" id="client-email" name="email" className="form-input" placeholder=" " />
+              <label className="form-label" htmlFor="client-email">Email Address</label>
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Phone</label>
-              <input type="tel" name="phone" className="form-input" placeholder="555-0100" />
+            <div className="form-floating">
+              <input type="tel" id="client-phone" name="phone" className="form-input" placeholder=" " />
+              <label className="form-label" htmlFor="client-phone">Phone Number</label>
             </div>
           </div>
           
-          <button type="submit" className="btn btn-primary">Save Client</button>
+          <button type="submit" className="btn btn-primary btn-neon" style={{ padding: '12px 28px' }}>Save Client</button>
         </form>
       </div>
     </div>

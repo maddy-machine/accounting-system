@@ -30,15 +30,30 @@ export default async function Clients() {
             <tbody>
               {clients.length === 0 && (
                 <tr>
-                  <td colSpan={4} style={{ textAlign: 'center', color: 'var(--text-muted)' }}>No clients yet.</td>
+                  <td colSpan={4} style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '40px' }}>
+                    <div style={{ fontSize: '28px', marginBottom: '8px', opacity: 0.3 }}>◉</div>
+                    No clients yet.
+                  </td>
                 </tr>
               )}
               {clients.map((client) => (
                 <tr key={client.id}>
-                  <td style={{ fontWeight: 500 }}>{client.name}</td>
-                  <td>{client.company || '-'}</td>
-                  <td>{client.email || '-'}</td>
-                  <td>{client.invoices.length}</td>
+                  <td style={{ fontWeight: 600, color: 'var(--foreground)' }}>{client.name}</td>
+                  <td>{client.company || <span style={{ opacity: 0.4 }}>—</span>}</td>
+                  <td style={{ color: 'var(--accent-dark)' }}>{client.email || <span style={{ opacity: 0.4, color: 'var(--text-muted)' }}>—</span>}</td>
+                  <td>
+                    <span style={{
+                      padding: '4px 12px',
+                      background: 'var(--accent-soft)',
+                      borderRadius: '8px',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      color: 'var(--accent)',
+                      border: '1px solid rgba(244, 208, 63, 0.15)',
+                    }}>
+                      {client.invoices.length}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
